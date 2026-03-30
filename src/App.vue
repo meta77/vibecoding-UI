@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-const activeTab = ref<'general' | 'tailwind'>('general')
+const activeTab = ref<'general' | 'tailwind' | 'tutorial'>('general')
 const activeGenreId = ref('action')
 
 const generalGenres = [
@@ -112,6 +112,47 @@ const tailwindParts = [
     demoComponent: "skeleton"
   }
 ]
+
+const tutorialSteps = [
+  {
+    id: "step1",
+    title: "1. HTML（骨組み）とCSS（服）って何？",
+    description: "Webページを作るには2つの言葉を使います。**HTML（エイチティーエムエル）** は、家の「柱や壁」を作る骨組み。**CSS（シーエスエス）** は、その家に「壁紙や家具」を飾るデザインのお洋服です。<br><br>Tailwind（テイルウィンド）は、あらかじめ用意された「**服のラベルタグ（クラス）**」をHTMLに直接くっつけるだけで、簡単にデザインができる魔法のツールです。",
+    demoTitle: "イメージ図",
+    demoComponent: "step1-demo"
+  },
+  {
+    id: "step2",
+    title: "2. 色（色）と大きさ（サイズ）を変えてみよう",
+    description: "例えば、文字を赤くしたい時は `text-red-500` というラベルをつけます。文字を大きくしたい時は `text-2xl`（ツーエックスエル）をつけます。<br>英語で「text（文字）、red（赤）、500（濃さ）」と読むように、直感的にデザインが変わります。",
+    code: '<p class="text-red-500 text-2xl">\n  こんにちは、Tailwind！\n</p>',
+    demoTitle: "プレビュー",
+    demoComponent: "step2-demo"
+  },
+  {
+    id: "step3",
+    title: "3. 余白（よはく）の魔法（PaddingとMargin）",
+    description: "デザインを綺麗に見せるには「余白（空白）」がとても大事です。<br><br>・**Padding（パディング）**: 箱の「内側」のクッションです。`p-4` と書くと余白ができます。<br>・**Margin（マージン）**: 箱の「外側」のバリア（距離）です。`m-4` と書くと、隣のものとぶつかりません。",
+    demoTitle: "箱（Box）の図解",
+    demoComponent: "step3-demo"
+  },
+  {
+    id: "step4",
+    title: "4. 角を丸くして、影をつける",
+    description: "現代のアプリの多くは、角が少し丸くなっていて、フワッと浮いているような立体感があります。<br><br>・**rounded-lg**: 角（かど）を丸く（ラウンド）します。<br>・**shadow-md**: 影（シャドウ）を落として立体的に見せます。",
+    code: '<div class="bg-white rounded-lg shadow-md p-4">\n  丸くて影のあるカード\n</div>',
+    demoTitle: "プレビュー",
+    demoComponent: "step4-demo"
+  },
+  {
+    id: "step5",
+    title: "✨ 実践: 全てを組み合わせて「ボタン」を作ろう",
+    description: "これまでに学んだ「色」「大きさ」「内側の余白（p）」「角丸（rounded）」「影（shadow）」を全部合体させると、本物のアプリのような綺麗なボタンがたった1行のラベルで完成します！",
+    code: '<button class="bg-blue-500 text-white font-bold p-4 rounded-lg shadow-md">\n  クリックしてね\n</button>',
+    demoTitle: "完成品（プレビュー）",
+    demoComponent: "step5-demo"
+  }
+]
 </script>
 
 <template>
@@ -134,7 +175,7 @@ const tailwindParts = [
 
     <main class="w-full max-w-7xl px-8 pb-40 flex-1">
       <!-- Main Tabs Navigation -->
-      <nav class="flex items-center gap-12 border-b border-neutral-800 mb-16 relative">
+      <nav class="flex items-center gap-6 md:gap-12 border-b border-neutral-800 mb-16 relative overflow-x-auto whitespace-nowrap hide-scrollbar">
         <button
           @click="activeTab = 'general'"
           :class="['pb-5 text-sm font-bold tracking-wider transition-all duration-300 border-b-2 z-10', activeTab === 'general' ? 'border-white text-white' : 'border-transparent text-neutral-600 hover:text-neutral-400']"
@@ -146,6 +187,13 @@ const tailwindParts = [
           :class="['pb-5 text-sm font-bold tracking-wider transition-all duration-300 border-b-2 z-10', activeTab === 'tailwind' ? 'border-white text-white' : 'border-transparent text-neutral-600 hover:text-neutral-400']"
         >
           Tailwind Patterns
+        </button>
+        <button
+          @click="activeTab = 'tutorial'"
+          :class="['pb-5 text-sm font-bold tracking-wider transition-all duration-300 border-b-2 z-10 flex items-center gap-2', activeTab === 'tutorial' ? 'border-emerald-400 text-emerald-400' : 'border-transparent text-neutral-600 hover:text-neutral-400']"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Tailwind Beginner (初心者向け)
         </button>
       </nav>
 
@@ -341,6 +389,132 @@ const tailwindParts = [
               </div>
             </div>
           </div>
+
+          <!-- Tutorial Tab: Beginners -->
+          <div v-else-if="activeTab === 'tutorial'" key="tutorial" class="max-w-4xl mx-auto flex flex-col gap-12 pb-20">
+            <div class="text-center mb-8">
+              <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-400 mb-6 tracking-tight">Tailwind 超・入門塾 🐣</h2>
+              <p class="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                デザインやプログラミングを全く知らなくても大丈夫！<br>
+                Webページの見た目を操る「魔法のラベル」の使い方を、一歩ずつ一緒に学びましょう！
+              </p>
+            </div>
+
+            <!-- Tutorial Steps -->
+            <div v-for="(step, index) in tutorialSteps" :key="step.id" class="bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+              
+              <!-- Step Decorative Number -->
+              <div class="absolute -top-4 -right-4 text-[120px] font-black text-white/[0.02] leading-none select-none pointer-events-none">
+                {{ index + 1 }}
+              </div>
+
+              <!-- Header -->
+              <h3 class="text-2xl md:text-3xl font-bold text-stone-100 mb-6 relative z-10">
+                {{ step.title }}
+              </h3>
+              
+              <!-- Description (HTML rendering for <br> support) -->
+              <p class="text-neutral-300 text-base md:text-lg leading-relaxed mb-10 font-medium relative z-10" v-html="step.description"></p>
+
+              <!-- Optional Code block -->
+              <div v-if="step.code" class="bg-[#121212] rounded-2xl p-6 mb-10 border border-neutral-800 relative z-10 overflow-x-auto">
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                  <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                  <span class="text-xs font-mono text-neutral-500 ml-2">魔法の呪文（コードの書き方）</span>
+                </div>
+                <pre class="text-emerald-300 font-mono text-sm leading-relaxed whitespace-pre-wrap">{{ step.code }}</pre>
+              </div>
+
+              <!-- Visual Demo / Diagram -->
+              <div class="relative z-10">
+                <div class="text-[10px] font-black uppercase tracking-widest text-emerald-400/70 mb-3 border-l-2 border-emerald-500/50 pl-2">{{ step.demoTitle }}</div>
+                
+                <div class="w-full bg-[#121212] border border-neutral-800 rounded-2xl p-8 md:p-12 flex flex-col items-center justify-center min-h-[200px]">
+                  
+                  <!-- Step 1 Demo: House Metaphor -->
+                  <template v-if="step.demoComponent === 'step1-demo'">
+                    <div class="flex flex-col md:flex-row items-center gap-8 text-center text-sm font-bold text-neutral-400">
+                      <div class="flex flex-col items-center gap-4">
+                        <div class="w-20 h-20 border-4 border-dashed border-neutral-600 flex items-center justify-center rounded-xl">
+                          📝 HTML
+                        </div>
+                        <span>ただの<br>「骨組み」の箱</span>
+                      </div>
+                      <span class="text-4xl text-neutral-600">＋</span>
+                      <div class="flex flex-col items-center gap-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center rounded-full text-neutral-900 shadow-xl shadow-emerald-500/30">
+                          ✨ Tailwind
+                        </div>
+                        <span>魔法の<br>「服のラベル」</span>
+                      </div>
+                      <span class="text-4xl text-neutral-600">＝</span>
+                      <div class="flex flex-col items-center gap-4">
+                        <div class="w-24 h-24 bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center rounded-xl shadow-[0_0_30px_rgba(52,211,153,0.3)] text-neutral-900 text-base">
+                          美しい家 🎉
+                        </div>
+                        <span>綺麗なデザインの<br>Webページ！</span>
+                      </div>
+                    </div>
+                  </template>
+
+                  <!-- Step 2 Demo: Text Styling -->
+                  <template v-if="step.demoComponent === 'step2-demo'">
+                    <div class="flex flex-col items-center gap-6">
+                      <p class="text-neutral-500 text-sm">最初はこれだった文字が…</p>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                      <p class="text-red-500 text-3xl font-bold bg-red-500/10 px-6 py-3 rounded-lg border border-red-500/20">
+                        こんにちは、Tailwind！
+                      </p>
+                      <p class="text-xs text-neutral-400 mt-2">（赤くて大きな文字に変身しました！）</p>
+                    </div>
+                  </template>
+
+                  <!-- Step 3 Demo: Padding and Margin -->
+                  <template v-if="step.demoComponent === 'step3-demo'">
+                    <div class="relative w-64 h-64 border border-blue-500/30 rounded-xl bg-blue-500/5 flex flex-col items-center justify-center">
+                      <div class="absolute -top-6 text-blue-400 font-mono text-xs font-bold">↑ Margin (外側のバリア)</div>
+                      
+                      <div class="w-48 h-48 border-2 border-emerald-500 rounded-lg bg-emerald-500/20 flex flex-col items-center justify-center relative">
+                        <div class="absolute top-2 text-emerald-300 font-mono text-xs font-bold">Inner Padding (内蔵クッション)</div>
+                        
+                        <div class="w-32 h-32 bg-stone-200 rounded text-neutral-900 font-bold flex items-center justify-center">
+                          中身の文字
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+
+                  <!-- Step 4 Demo: Rounded and Shadow -->
+                  <template v-if="step.demoComponent === 'step4-demo'">
+                    <div class="flex flex-col sm:flex-row gap-8 items-center justify-center w-full">
+                      <div class="w-40 h-40 bg-white flex items-center justify-center text-black font-bold text-center p-4">
+                        ただの四角。<br>少し硬い印象😢
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                      <div class="w-40 h-40 bg-white rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex items-center justify-center text-black font-bold text-center p-4 border border-white/20">
+                        角が丸くて、<br>影が浮いている！😍
+                      </div>
+                    </div>
+                  </template>
+
+                  <!-- Step 5 Demo: Final Button -->
+                  <template v-if="step.demoComponent === 'step5-demo'">
+                    <div class="flex flex-col items-center gap-6">
+                      <button class="bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold px-10 py-5 rounded-2xl shadow-[0_10px_25px_rgba(37,99,235,0.4)] transition-all text-xl">
+                        クリックしてね
+                      </button>
+                      <p class="text-sm text-neutral-500 mt-4 max-w-sm text-center">
+                        触ってみてください！<br>こんなにリッチなボタンも「ラベル」を英語で書くだけで作れてしまいます。素晴らしいですね！
+                      </p>
+                    </div>
+                  </template>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </Transition>
       </div>
     </main>
@@ -363,4 +537,13 @@ const tailwindParts = [
 }
 .page-enter-from { opacity: 0; transform: translateY(10px); }
 .page-leave-to { opacity: 0; transform: translateY(-10px); }
+
+/* Hide scrollbar for tabs on mobile */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 </style>
