@@ -42,7 +42,43 @@ const generalGenres = [
       }
     ]
   },
-  { id: 'input', name: 'Input & Forms', description: 'ユーザーからの情報を受け取るためのパーツ。(準備中)', parts: [] },
+  {
+    id: 'input',
+    name: 'Input & Forms',
+    description: 'ユーザーからの情報を収集し、正確に入力してもらうためのパーツ。',
+    parts: [
+      {
+        name: "Text Input (基本入力)",
+        description: "最も基本的な入力要素。プレースホルダー、フォーカス時の視覚的フィードバック（グロー効果など）が重要。",
+        prompt: "「背景が `neutral-800`、境界線が `neutral-700`、フォーカス時に `stone-100` の繊細なアウトラインを放つ、洗練された入力フィールドを作成してください。文字色は `stone-200` に設定してください。」",
+        demoComponent: "text-input"
+      },
+      {
+        name: "Checkbox (複数選択)",
+        description: "ユーザーが複数のオプションを選択するためのパーツ。標準のブラウザスタイルを隠し、カスタムデザインにするのがモダン。",
+        prompt: "「角丸の `neutral-800` の正方形ボックスで、チェックが入ると背景が `stone-100` になり、中に `neutral-900` のチェックアイコンが表示されるカスタムチェックボックスを作成してください。」",
+        demoComponent: "checkbox"
+      },
+      {
+        name: "Radio Button (単一選択)",
+        description: "排他的な選択肢から一つを選ぶ。ドットの中心が光るような、触感を感じさせるデザインが好まれる。",
+        prompt: "「円形の `neutral-800` の外枠の中に、選択時に `stone-100` の小さな円が浮かび上がるラジオボタンを作成してください。選択状態に応じてラベルの色も変わるように設計してください。」",
+        demoComponent: "radio"
+      },
+      {
+        name: "Toggle Switch (トグル)",
+        description: "ON/OFFの即時切り替えを示す。滑らかなスライドアニメーションが、ユーザー体験を豊かにする。",
+        prompt: "「幅広の角丸カプセル型の背景の中で、白い円形のつまみが左右に滑らかにスライドするトグルスイッチを作成してください。ONの時は背景が `neutral-700` に変化するようにしてください。」",
+        demoComponent: "toggle"
+      },
+      {
+        name: "Select Menu (セレクト)",
+        description: "多くの選択肢がある場合に、場所を取らずに一つを選ばせる。ドロップダウン矢印の配置と、一貫したスタイルが鍵。",
+        prompt: "「標準の `select` 要素をカスタムスタイルで隠し、右側に小さな下向き矢印アイコンを配置したセレクトメニューを作成してください。背景は `neutral-800`、フォーカス時に `border-stone-100` になるようにしてください。」",
+        demoComponent: "select"
+      }
+    ]
+  },
   { id: 'navigation', name: 'Navigation', description: '目的地に辿り着くためのパーツ。(準備中)', parts: [] },
   { id: 'container', name: 'Container & Layout', description: '情報をグループ化する器のパーツ。(準備中)', parts: [] },
   { id: 'feedback', name: 'Status & Feedback', description: 'システムの状態を画面上に返すパーツ。(準備中)', parts: [] }
@@ -161,6 +197,7 @@ const tailwindParts = [
                       <!-- Grid paper background pattern for demo -->
                       <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
                       
+                      <!-- Action & Trigger Demos -->
                       <template v-if="item.demoComponent === 'primary-button'">
                         <button class="px-8 py-3 bg-stone-100 text-neutral-900 font-bold rounded-full transition-all hover:bg-white active:scale-95 shadow-xl shadow-white/5 text-sm">
                           Button
@@ -192,6 +229,46 @@ const tailwindParts = [
                       <template v-else-if="item.demoComponent === 'fab'">
                         <div class="absolute bottom-6 right-6 w-12 h-12 bg-white text-black rounded-full flex items-center justify-center shadow-xl cursor-pointer transition-all hover:-translate-y-1 hover:shadow-white/20 active:scale-90">
                           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </div>
+                      </template>
+
+                      <!-- Input & Forms Demos -->
+                      <template v-else-if="item.demoComponent === 'text-input'">
+                        <div class="w-2/3">
+                          <input type="text" placeholder="Sample Input" class="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-stone-200 outline-none focus:border-stone-100 transition-all placeholder:text-neutral-600">
+                        </div>
+                      </template>
+
+                      <template v-else-if="item.demoComponent === 'checkbox'">
+                        <div class="flex items-center gap-4">
+                          <div class="w-7 h-7 bg-stone-100 rounded-lg flex items-center justify-center text-neutral-900 shadow-lg shadow-white/5 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          </div>
+                          <span class="text-sm font-bold text-stone-300">Checked</span>
+                        </div>
+                      </template>
+
+                      <template v-else-if="item.demoComponent === 'radio'">
+                        <div class="flex items-center gap-4">
+                          <div class="w-7 h-7 rounded-full border-2 border-stone-100 flex items-center justify-center cursor-pointer">
+                            <div class="w-3.5 h-3.5 rounded-full bg-stone-100"></div>
+                          </div>
+                          <span class="text-sm font-bold text-stone-100">Selected</span>
+                        </div>
+                      </template>
+
+                      <template v-else-if="item.demoComponent === 'toggle'">
+                        <div class="w-14 h-8 bg-neutral-700 rounded-full relative p-1 cursor-pointer transition-all">
+                          <div class="absolute right-1 w-6 h-6 bg-white rounded-full shadow-lg"></div>
+                        </div>
+                      </template>
+
+                      <template v-else-if="item.demoComponent === 'select'">
+                        <div class="w-2/3 relative">
+                          <div class="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-stone-200 flex justify-between items-center cursor-pointer">
+                            <span>Dropdown Option</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                          </div>
                         </div>
                       </template>
                     </div>
