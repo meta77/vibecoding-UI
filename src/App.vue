@@ -113,96 +113,134 @@ const tailwindParts = [
   }
 ]
 
-const tutorialSteps = [
+const tutorialChapters = [
   {
-    id: "step1",
-    title: "1. ユーティリティファーストの哲学",
-    description: "Webページを作るには <b>HTML（骨組み）</b> と <b>CSS（デザイン）</b> を使います。<br>通常、CSSは別のファイルに複雑なルールを書きますが、Tailwindは「あらかじめ用意されたタグ（ユーティリティクラス）」をパズルのようにHTMLに直接くっつけてデザインを作ります。",
-    insightLevel: "中級者向けの視点（設計思想）",
-    insightText: "なぜTailwindを使うと洗練されるのか？それはシステムが事前に色やサイズの「美しい制限（スケール）」を持っているため、開発者が自由に設定しすぎてデザインが破綻するのを防ぐからです。",
-    demoTitle: "イメージ図",
-    demoComponent: "step1-demo"
+    chapterTitle: "第1章：Tailwindの始め方",
+    chapterDescription: "Vite環境へのTailwind v4の導入手法を解説します。",
+    steps: [
+      {
+        id: "step1",
+        title: "1. Vite + Tailwind v4 のインストール",
+        description: "最新のフロントエンドツール「Vite（ヴィート）」を使い、素早くプロジェクトの土台を作成します。",
+        code: "npm create vite@latest my-project\\ncd my-project\\nnpm install tailwindcss @tailwindcss/vite",
+        insightLevel: "セットアップの極意",
+        insightText: "Tailwind v4 から導入構成が劇的にシンプルになりました。PostCSSなどの複雑な設定ファイルは不要で、Viteプラグインを一つ入れるだけで最速のモダン開発環境が整います。",
+        demoTitle: "ターミナル実行イメージ",
+        demoComponent: "terminal-demo"
+      },
+      {
+        id: "step2",
+        title: "2. Tailwind プラグインの有効化",
+        description: "<code>vite.config.ts</code> にプラグインを登録し、<code>style.css</code> の先頭でTailwindを読み込みます。",
+        code: '/* style.css */\n@import "tailwindcss";',
+        insightLevel: "CSSレスの設計",
+        insightText: "@import を一行書くだけで、これ以降は自分で独自のCSSファイルを触る必要がほぼなくなります。デザインは全てHTMLのクラスとして完結させるのがモダンなアプローチです。",
+        demoTitle: "エディタ設定イメージ",
+        demoComponent: "editor-demo"
+      }
+    ]
   },
   {
-    id: "step2",
-    title: "2. 空間の支配 (PaddingとMargin)",
-    description: "デザインを綺麗に見せるには「余白（空白）」がとても大事です。<br><br>・<b>Padding (`p-4` など)</b>: 箱の「内側」のクッション。<br>・<b>Margin (`m-4` など)</b>: 箱の「外側」のバリア（距離）。",
-    insightLevel: "中級者向けの視点（コツ）",
-    insightText: "余白はデザインの命です。Tailwindの余白クラスは基本的に `1` = `0.25rem`（約4px）に設計されています。UIを組む時は「8px（クラスの数値2の倍数）」で間隔を統一すると、画面全体に美しいリズムが生まれます。",
-    demoTitle: "箱（Box）の図解",
-    demoComponent: "step3-demo"
+    chapterTitle: "第2章：Tailwindの哲学、コツ",
+    chapterDescription: "美しいUIを組み上げるための「法則」と「設計思想」を学びます。",
+    steps: [
+      {
+        id: "step3",
+        title: "3. ユーティリティファーストの哲学",
+        description: "Webページを作るには <b>HTML（骨組み）</b> と <b>CSS（デザイン）</b> を使います。<br>通常、CSSは別のファイルに複雑なルールを書きますが、Tailwindは「あらかじめ用意されたタグ（ユーティリティクラス）」をパズルのようにHTMLに直接くっつけてデザインを作ります。",
+        insightLevel: "中級者向けの視点（設計思想）",
+        insightText: "なぜTailwindを使うと洗練されるのか？それはシステムが事前に色やサイズの「美しい制限（スケール）」を持っているため、開発者が自由に設定しすぎてデザインが破綻するのを防ぐからです。",
+        demoTitle: "イメージ図",
+        demoComponent: "step1-demo"
+      },
+      {
+        id: "step4",
+        title: "4. 空間の支配 (PaddingとMargin)",
+        description: "デザインを綺麗に見せるには「余白（空白）」がとても大事です。<br><br>・<b>Padding (`p-4` など)</b>: 箱の「内側」のクッション。<br>・<b>Margin (`m-4` など)</b>: 箱の「外側」のバリア（距離）。",
+        insightLevel: "中級者向けの視点（コツ）",
+        insightText: "余白はデザインの命です。Tailwindの余白クラスは基本的に `1` = `0.25rem`（約4px）に設計されています。UIを組む時は「8px（クラスの数値2の倍数）」で間隔を統一すると、画面全体に美しいリズムが生まれます。",
+        demoTitle: "箱（Box）の図解",
+        demoComponent: "step3-demo"
+      },
+      {
+        id: "step5",
+        title: "5. 要素のグループ化と空間 (Gapの魔法)",
+        description: "複数並べる時は <code>flex</code> と <code>gap</code> を使います。ここで重要なのが「余白の距離＝それぞれの関係性の強さ」というルールです。",
+        code: '<div class="flex flex-col gap-2">\n  <p>近い要素</p>\n  <p>（グループになる）</p>\n</div>',
+        insightLevel: "中級者向けの視点（近接の法則）",
+        insightText: "人間の脳は「近くにあるものを1つのグループ」として無意識に認識します。画像と見出しと説明文は狭く（gap-2 等）、別のカード・セクション同士は広く（gap-8 等）とることで、直感的に伝わる「情報のまとまり」を作ることができます。これをゲシュタルト要因の「近接」と呼びます。",
+        demoTitle: "均等な余白 vs グルーピングした余白",
+        demoComponent: "step-proximity-demo"
+      },
+      {
+        id: "step6",
+        title: "6. タイポグラフィと色彩心理",
+        description: "色と大きさを変えてみましょう。例えば文字を白くするなら `text-white`、サイズを大きくするなら `text-2xl` と書きます。英語の意味の通りに機能します。",
+        code: '<p class="text-stone-300 text-2xl font-bold">\n  Nordic Dark World\n</p>',
+        insightLevel: "中級者向けの視点（美しさの本質）",
+        insightText: "ダークテーマにおいて「本当に真っ黒（#000000）」や「真っ白（#FFFFFF）」を多用すると、コントラストが強すぎて目が疲れます。背景に `neutral-900` のような深みのあるグレーを、文字には真っ白ではない `stone-300` などを選ぶのが「Nordic Dark（北欧ダーク）」の極意です。",
+        demoTitle: "色のプレビュー",
+        demoComponent: "step2-demo"
+      },
+      {
+        id: "step7",
+        title: "7. 質感の構築 (角丸・ボーダー・影)",
+        description: "現在流行しているアプリの多くは、少し角を丸くして、浮いているような立体感を持っています。これだけで「硬い四角」が「モダンなカード」に変わります。",
+        code: '<div class="rounded-2xl border border-white/10 shadow-xl">\n  カード\n</div>',
+        insightLevel: "中級者向けの視点（設計思想）",
+        insightText: "暗い背景での「影（shadow）」は同化して見えにくいため、ダークテーマではわずかに光を反射しているように見せる「薄いボーダー（`border-white/10` など）」を描き、要素の輪郭（エッジ）を際立たせるテクニックが非常に重要です。",
+        demoTitle: "質感の比較",
+        demoComponent: "step4-demo"
+      },
+      {
+        id: "step8",
+        title: "8. 心地よいインタラクション",
+        description: "ボタンの上にマウスを乗せた時（ホバー）や、クリックした時の動きを設定します。Tailwindでは `hover:色` とするだけで、触れることができるようになります。",
+        code: '<button class="transition-all hover:bg-white active:scale-95">\n  ボタン\n</button>',
+        insightLevel: "中級者向けの視点（コツ）",
+        insightText: "ユーザーの操作に対する「わずかなアニメーション（`transition-all`）」と「押した感覚（`active:scale-95`）」は、即座にフィードバックを返すことでシステムへの安心感と上質さを大幅に引き立てます。",
+        demoTitle: "アニメーションがないUIとあるUI",
+        demoComponent: "step-interaction-demo"
+      }
+    ]
   },
   {
-    id: "step3",
-    title: "3. 要素のグループ化と空間 (Gapの魔法)",
-    description: "複数並べる時は <code>flex</code> と <code>gap</code> を使います。ここで重要なのが「余白の距離＝それぞれの関係性の強さ」というルールです。",
-    code: '<div class="flex flex-col gap-2">\n  <p>近い要素</p>\n  <p>（グループになる）</p>\n</div>',
-    insightLevel: "中級者向けの視点（近接の法則）",
-    insightText: "人間の脳は「近くにあるものを1つのグループ」として無意識に認識します。画像と見出しと説明文は狭く（gap-2 等）、別のカード・セクション同士は広く（gap-8 等）とることで、直感的に伝わる「情報のまとまり」を作ることができます。これをゲシュタルト要因の「近接」と呼びます。",
-    demoTitle: "均等な余白 vs グルーピングした余白",
-    demoComponent: "step-proximity-demo"
-  },
-  {
-    id: "step4",
-    title: "4. タイポグラフィと色彩心理",
-    description: "色と大きさを変えてみましょう。例えば文字を白くするなら `text-white`、サイズを大きくするなら `text-2xl` と書きます。英語の意味の通りに機能します。",
-    code: '<p class="text-stone-300 text-2xl font-bold">\n  Nordic Dark World\n</p>',
-    insightLevel: "中級者向けの視点（美しさの本質）",
-    insightText: "ダークテーマにおいて「本当に真っ黒（#000000）」や「真っ白（#FFFFFF）」を多用すると、コントラストが強すぎて目が疲れます。背景に `neutral-900` のような深みのあるグレーを、文字には真っ白ではない `stone-300` などを選ぶのが「Nordic Dark（北欧ダーク）」の極意です。",
-    demoTitle: "色のプレビュー",
-    demoComponent: "step2-demo"
-  },
-  {
-    id: "step5",
-    title: "5. 質感の構築 (角丸・ボーダー・影)",
-    description: "現在流行しているアプリの多くは、少し角を丸くして、浮いているような立体感を持っています。これだけで「硬い四角」が「モダンなカード」に変わります。",
-    code: '<div class="rounded-2xl border border-white/10 shadow-xl">\n  カード\n</div>',
-    insightLevel: "中級者向けの視点（設計思想）",
-    insightText: "暗い背景での「影（shadow）」は同化して見えにくいため、ダークテーマではわずかに光を反射しているように見せる「薄いボーダー（`border-white/10` など）」を描き、要素の輪郭（エッジ）を際立たせるテクニックが非常に重要です。",
-    demoTitle: "質感の比較",
-    demoComponent: "step4-demo"
-  },
-  {
-    id: "step6",
-    title: "6. 心地よいインタラクション",
-    description: "ボタンの上にマウスを乗せた時（ホバー）や、クリックした時の動きを設定します。Tailwindでは `hover:色` とするだけで、触れることができるようになります。",
-    code: '<button class="transition-all hover:bg-white active:scale-95">\n  ボタン\n</button>',
-    insightLevel: "中級者向けの視点（コツ）",
-    insightText: "ユーザーの操作に対する「わずかなアニメーション（`transition-all`）」と「押した感覚（`active:scale-95`）」は、即座にフィードバックを返すことでシステムへの安心感と上質さを大幅に引き立てます。",
-    demoTitle: "アニメーションがないUIとあるUI",
-    demoComponent: "step-interaction-demo"
-  },
-  {
-    id: "step7",
-    title: "統合実践 1: Primary Button の構築",
-    description: "学んだ知識を統合し、本サイトで使用している「一番目立たせるべきボタン」を作ります。ポイントは『真っ白ではなく石のような白（stone-100）』を使うことです。",
-    code: '<button class="px-8 py-3 bg-stone-100 text-neutral-900 font-bold rounded-full transition-all hover:bg-white active:scale-95 shadow-xl shadow-white/5 text-sm">\n  Primary Action\n</button>',
-    insightLevel: "設計思想",
-    insightText: "アクション全体の中で最も視線を誘導したい箇所（保存、次へ進む等）にのみ、この強いコントラストを持つソリッドボタンを使用します。",
-    demoTitle: "プレビュー",
-    demoComponent: "practice-btn"
-  },
-  {
-    id: "step8",
-    title: "統合実践 2: Status Badge (ステータスバッジ) の構築",
-    description: "「完了」「処理中」などを控えめに示す小さなバッジです。背景色を透過（`/10` などの不透明度）させることがコツです。",
-    code: '<span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold tracking-wide">\n  Success\n</span>',
-    insightLevel: "設計思想",
-    insightText: "原色をベタ塗りすると目立ちすぎてしまうため、文字色・背景色・枠線を全て『同じ色相（emeraldなど）』に揃えつつ、透明度を変えてなじませるのがモダンUIの基本形です。",
-    demoTitle: "プレビュー",
-    demoComponent: "practice-badge"
-  },
-  {
-    id: "step9",
-    title: "統合実践 3: Container Card (コンテナカード) の構築",
-    description: "情報を美しく包み込む箱です。背景を他の要素よりもわずかに浮き上がらせ（明るくし）、薄いボーダーで仕切ることで情報の独立性を高めます。",
-    code: '<div class="p-6 bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] hover:border-neutral-700 transition-colors shadow-lg">\n  <h3 class="text-xl font-bold text-stone-100 mb-2">Nordic Card</h3>\n  <p class="text-neutral-400 text-sm">美しい余白と細い境界線がもたらす情報整理。</p>\n</div>',
-    insightLevel: "設計思想",
-    insightText: "ただの箱ではなく、情報をグループ化し、見出し（白）と説明文（グレー）という文字の対比によって読者にストレスを与えずに視線を誘導します。",
-    demoTitle: "プレビュー",
-    demoComponent: "practice-card"
+    chapterTitle: "第3章：よくあるUIパーツの具体例 (Nordic Dark)",
+    chapterDescription: "これまでの法則を活用し、上質な具体的なUIパーツを自作してみましょう。",
+    steps: [
+      {
+        id: "step9",
+        title: "9. Primary Button の構築",
+        description: "一番目立たせるべきボタンを作ります。ポイントは『真っ白ではなく石のような白（stone-100）』を使うことです。",
+        code: '<button class="px-8 py-3 bg-stone-100 text-neutral-900 font-bold rounded-full transition-all hover:bg-white active:scale-95 shadow-xl shadow-white/5 text-sm">\n  Primary Action\n</button>',
+        insightLevel: "設計思想",
+        insightText: "アクション全体の中で最も視線を誘導したい箇所（保存、次へ進む等）にのみ、この強いコントラストを持つソリッドボタンを使用します。",
+        demoTitle: "プレビュー",
+        demoComponent: "practice-btn"
+      },
+      {
+        id: "step10",
+        title: "10. Status Badge (ステータスバッジ) の構築",
+        description: "「完了」「処理中」などを控えめに示す小さなバッジです。背景色を透過（`/10` などの不透明度）させることがコツです。",
+        code: '<span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold tracking-wide">\n  Success\n</span>',
+        insightLevel: "設計思想",
+        insightText: "原色をベタ塗りすると目立ちすぎてしまうため、文字色・背景色・枠線を全て『同じ色相（emeraldなど）』に揃えつつ、透明度を変えてなじませるのがモダンUIの基本形です。",
+        demoTitle: "プレビュー",
+        demoComponent: "practice-badge"
+      },
+      {
+        id: "step11",
+        title: "11. Container Card (コンテナカード) の構築",
+        description: "情報を美しく包み込む箱です。背景を他の要素よりもわずかに浮き上がらせ（明るくし）、薄いボーダーで仕切ることで情報の独立性を高めます。",
+        code: '<div class="p-6 bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] hover:border-neutral-700 transition-colors shadow-lg">\n  <h3 class="text-xl font-bold text-stone-100 mb-2">Nordic Card</h3>\n  <p class="text-neutral-400 text-sm">美しい余白と細い境界線がもたらす情報整理。</p>\n</div>',
+        insightLevel: "設計思想",
+        insightText: "ただの箱ではなく、情報をグループ化し、見出し（白）と説明文（グレー）という文字の対比によって読者にストレスを与えずに視線を誘導します。",
+        demoTitle: "プレビュー",
+        demoComponent: "practice-card"
+      }
+    ]
   }
-]
+];
 </script>
 
 <template>
@@ -435,190 +473,208 @@ const tutorialSteps = [
               </p>
             </div>
 
-            <!-- Tutorial Steps -->
-            <div v-for="(step, index) in tutorialSteps" :key="step.id" class="bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden group hover:border-neutral-700 transition-colors duration-500">
-              
-              <!-- Step Decorative Number -->
-              <div class="absolute -top-4 -right-4 text-[120px] font-black text-white/[0.02] leading-none select-none pointer-events-none transition-transform duration-700 group-hover:scale-110">
-                {{ index + 1 }}
+            
+            <!-- Chapters Loop -->
+            <div v-for="(chapter, cIndex) in tutorialChapters" :key="'chap'+cIndex" class="mb-24">
+              <!-- Chapter Title -->
+              <div class="mb-12 border-b border-neutral-800 pb-6 relative">
+                <div class="absolute -left-8 top-1/2 -translate-y-1/2 w-4 h-[2px] bg-emerald-400 opacity-50 hidden md:block"></div>
+                <h3 class="text-3xl font-extrabold text-stone-100 mb-3">{{ chapter.chapterTitle }}</h3>
+                <p class="text-neutral-400 text-base md:text-lg">{{ chapter.chapterDescription }}</p>
               </div>
 
-              <!-- Header -->
-              <h3 class="text-2xl md:text-3xl font-bold text-stone-100 mb-6 relative z-10">
-                {{ step.title }}
-              </h3>
-              
-              <!-- Description (HTML rendering for <br> support) -->
-              <p class="text-neutral-300 text-base md:text-lg leading-relaxed mb-6 font-medium relative z-10" v-html="step.description"></p>
-
-              <!-- Advanced Insights Block (For intermediate users) -->
-              <div v-if="step.insightText" class="mb-10 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5 relative z-10 flex gap-4 text-emerald-100 text-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <div>
-                  <div class="font-bold text-emerald-400 mb-1 text-xs uppercase tracking-widest">{{ step.insightLevel }}</div>
-                  <p class="leading-relaxed opacity-90 font-mono">{{ step.insightText }}</p>
-                </div>
-              </div>
-
-              <!-- Optional Code block -->
-              <div v-if="step.code" class="bg-[#121212] rounded-2xl p-6 mb-10 border border-neutral-800 relative z-10 overflow-x-auto">
-                <div class="flex items-center gap-2 mb-4">
-                  <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
-                  <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
-                  <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
-                  <span class="text-xs font-mono text-neutral-500 ml-2">Tailwind Code</span>
-                </div>
-                <pre class="text-stone-300 font-mono text-sm leading-relaxed whitespace-pre-wrap">{{ step.code }}</pre>
-              </div>
-
-              <!-- Visual Demo / Diagram -->
-              <div class="relative z-10">
-                <div class="text-[10px] font-black uppercase tracking-widest text-emerald-400/70 mb-3 border-l-2 border-emerald-500/50 pl-2">{{ step.demoTitle }}</div>
-                
-                <div class="w-full bg-[#121212] border border-neutral-800 rounded-2xl p-8 md:p-12 mb-4 flex flex-col items-center justify-center min-h-[200px] overflow-hidden">
+              <!-- Tutorial Steps -->
+              <div class="flex flex-col gap-12">
+                <div v-for="step in chapter.steps" :key="step.id" class="bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden group hover:border-neutral-700 transition-colors duration-500">
                   
-                  <!-- Step 1 Demo: Philosophy Metaphor -->
-                  <template v-if="step.demoComponent === 'step1-demo'">
-                    <div class="flex flex-col md:flex-row items-center gap-8 text-center text-sm font-bold text-neutral-400">
-                      <div class="flex flex-col items-center gap-4">
-                        <div class="w-20 h-20 border-4 border-dashed border-neutral-600 flex items-center justify-center rounded-xl">
-                          HTML
-                        </div>
-                        <span>構造のみの<br>「骨組み」</span>
-                      </div>
-                      <span class="text-3xl text-neutral-600">＋</span>
-                      <div class="flex flex-col items-center gap-4">
-                        <div class="w-24 h-20 bg-neutral-800 flex items-center justify-center rounded-xl shadow-lg border border-neutral-700 text-xs gap-1 flex-wrap p-2 text-emerald-400">
-                          <span>p-4</span><span>flex</span><span>bg-dark</span><span>rounded</span>
-                        </div>
-                        <span>無数の便利な<br>「ユーティリティ」</span>
-                      </div>
-                      <span class="text-3xl text-neutral-600">＝</span>
-                      <div class="flex flex-col items-center gap-4">
-                        <div class="px-6 py-3 bg-stone-100 text-neutral-900 rounded-full font-bold shadow-xl">
-                          Nordic Button
-                        </div>
-                        <span>洗練された<br>UIコンポーネント</span>
-                      </div>
-                    </div>
-                  </template>
+                  <div class="absolute -top-4 -right-4 text-[120px] font-black text-white/[0.02] leading-none select-none pointer-events-none transition-transform duration-700 group-hover:scale-110">
+                    {{ step.title.split('.')[0] }}
+                  </div>
 
-                  <!-- Step 2 Demo: Theme Colors -->
-                  <template v-if="step.demoComponent === 'step2-demo'">
-                    <div class="flex flex-col items-center gap-8 w-full max-w-sm text-center">
-                      <div class="p-6 bg-black text-white w-full border border-red-500/30">
-                        <h4 class="text-xl font-bold mb-2">#000000 & #FFFFFF</h4>
-                        <p class="text-xs">コントラストが強すぎて長時間見ると目が疲れる、よくあるダークモード表現。</p>
-                      </div>
-                      <div class="p-6 bg-neutral-900 text-stone-300 w-full border border-emerald-500/30 rounded-2xl shadow-xl">
-                        <h4 class="text-xl font-bold mb-2 text-stone-100">Nordic Dark</h4>
-                        <p class="text-sm">背景は深いグレー、文字は温かみのあるストーン。上質で目に優しい美しさ。</p>
-                      </div>
-                    </div>
-                  </template>
+                  <h3 class="text-2xl md:text-3xl font-bold text-stone-100 mb-6 relative z-10">
+                    {{ step.title }}
+                  </h3>
+                  
+                  <p class="text-neutral-300 text-base md:text-lg leading-relaxed mb-6 font-medium relative z-10" v-html="step.description"></p>
 
-                  <!-- Step 3 Demo: Padding and Margin -->
-                  <template v-if="step.demoComponent === 'step3-demo'">
-                    <div class="relative w-64 h-64 border border-blue-500/30 rounded-xl bg-blue-500/5 flex flex-col items-center justify-center">
-                      <div class="absolute -top-6 text-blue-400 font-mono text-xs font-bold">↑ Margin (m-8 : 要素間の距離)</div>
+                  <div v-if="step.insightText" class="mb-10 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5 relative z-10 flex gap-4 text-emerald-100 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <div>
+                      <div class="font-bold text-emerald-400 mb-1 text-xs uppercase tracking-widest">{{ step.insightLevel }}</div>
+                      <p class="leading-relaxed opacity-90 font-mono">{{ step.insightText }}</p>
+                    </div>
+                  </div>
+
+                  <div v-if="step.code" class="bg-[#121212] rounded-2xl p-6 mb-10 border border-neutral-800 relative z-10 overflow-x-auto">
+                    <div class="flex items-center gap-2 mb-4">
+                      <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                      <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                      <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                      <span class="text-xs font-mono text-neutral-500 ml-2">Tailwind Code</span>
+                    </div>
+                    <pre class="text-stone-300 font-mono text-sm leading-relaxed whitespace-pre-wrap">{{ step.code }}</pre>
+                  </div>
+
+                  <div class="relative z-10">
+                    <div class="text-[10px] font-black uppercase tracking-widest text-emerald-400/70 mb-3 border-l-2 border-emerald-500/50 pl-2">{{ step.demoTitle }}</div>
+                    <div class="w-full bg-[#121212] border border-neutral-800 rounded-2xl p-8 md:p-12 mb-4 flex flex-col items-center justify-center min-h-[200px] overflow-hidden">
                       
-                      <div class="w-48 h-48 border-2 border-emerald-500 rounded-2xl bg-emerald-500/20 flex flex-col items-center justify-center relative">
-                        <div class="absolute top-3 text-emerald-300 font-mono text-xs font-bold">Padding (p-6)</div>
-                        
-                        <div class="w-32 h-32 bg-stone-200 rounded-xl text-neutral-900 font-bold flex flex-col items-center justify-center text-sm px-4 text-center">
-                          ゆとりのある<br>コンテンツ領域
+                      <template v-if="step.demoComponent === 'terminal-demo'">
+                        <div class="w-full max-w-lg bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden shadow-2xl text-left">
+                          <div class="bg-neutral-800/80 px-4 py-3 flex items-center gap-2 border-b border-neutral-700/50">
+                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            <span class="text-[10px] text-neutral-400 ml-4 font-mono font-bold tracking-widest uppercase">bash</span>
+                          </div>
+                          <div class="p-6 font-mono text-sm leading-relaxed text-stone-300">
+                            <span class="text-emerald-400 font-bold">➜</span> <span class="text-stone-100 font-bold">~</span> <span class="text-neutral-400">npm create</span> <span class="text-stone-300">vite@latest my-project</span><br>
+                            <span class="text-emerald-400 font-bold">➜</span> <span class="text-stone-100 font-bold">my-project</span> <span class="text-neutral-400">npm install</span> <span class="text-stone-300">tailwindcss @tailwindcss/vite</span><br>
+                            <span class="text-emerald-400">✔</span> <span class="text-stone-400">Packages installed successfully.</span>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </template>
+                      </template>
 
-                  <!-- New Step 3 Demo: Proximity and Gap Law -->
-                  <template v-if="step.demoComponent === 'step-proximity-demo'">
-                    <div class="flex flex-col md:flex-row gap-8 w-full items-center justify-center text-left">
-                      <!-- Bad Example -->
-                      <div class="flex-1 bg-black p-6 rounded-2xl border border-red-500/30 flex flex-col w-full max-w-sm shrink-0">
-                        <div class="text-[10px] font-bold text-red-400 mb-4 tracking-widest text-center opacity-80">BAD (均等な余白)</div>
-                        <div class="w-full flex-col flex space-y-6">
-                           <!-- Gap is totally equal everywhere -->
-                           <div class="w-12 h-12 bg-neutral-800 rounded-lg"></div>
-                           <div class="h-3 bg-neutral-700 rounded w-1/2"></div>
-                           <div class="h-2 bg-neutral-800 rounded w-full"></div>
-                           <!-- second item -->
-                           <div class="w-12 h-12 bg-neutral-800 rounded-lg"></div>
-                           <div class="h-3 bg-neutral-700 rounded w-1/2"></div>
-                           <div class="h-2 bg-neutral-800 rounded w-full"></div>
+                      <template v-if="step.demoComponent === 'editor-demo'">
+                        <div class="w-full max-w-lg bg-[#111111] border border-neutral-800 rounded-xl overflow-hidden shadow-2xl text-left font-mono">
+                          <div class="flex items-center text-xs text-neutral-500 bg-neutral-900/80">
+                            <div class="px-5 py-2.5 border-r border-neutral-800">vite.config.ts</div>
+                            <div class="px-5 py-2.5 bg-neutral-800/30 text-emerald-400 border-t-2 border-emerald-400">style.css</div>
+                          </div>
+                          <div class="p-6 text-sm leading-relaxed">
+                            <span class="text-stone-500 italic">/* Tailwindのコア機能の読み込む */</span><br>
+                            <span class="text-emerald-400">@import</span> <span class="text-stone-300">"tailwindcss"</span>;<br><br>
+                            <span class="text-stone-500 italic">/* 独自のCSSは書かずに終わります */</span>
+                          </div>
                         </div>
-                      </div>
+                      </template>
 
-                      <!-- Good Example -->
-                      <div class="flex-1 bg-neutral-900 border border-emerald-500/30 shadow-2xl rounded-[2rem] p-6 flex flex-col w-full max-w-sm relative">
-                        <div class="text-[10px] font-bold text-emerald-400 mb-4 tracking-widest text-center">GOOD (グルーピング)</div>
-                        <div class="w-full flex-col flex gap-8">
-                           <!-- Group 1 -->
-                           <div class="flex flex-col gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
-                             <div class="w-12 h-12 bg-neutral-700 rounded-lg"></div>
-                             <div class="h-3 bg-stone-300 rounded w-1/2"></div>
-                             <div class="h-2 bg-neutral-600 rounded w-full"></div>
-                           </div>
-                           <!-- Group 2 -->
-                           <div class="flex flex-col gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
-                             <div class="w-12 h-12 bg-neutral-700 rounded-lg"></div>
-                             <div class="h-3 bg-stone-300 rounded w-1/2"></div>
-                             <div class="h-2 bg-neutral-600 rounded w-full"></div>
-                           </div>
+                      <template v-if="step.demoComponent === 'step1-demo'">
+                        <div class="flex flex-col md:flex-row items-center gap-8 text-center text-sm font-bold text-neutral-400">
+                          <div class="flex flex-col items-center gap-4">
+                            <div class="w-20 h-20 border-4 border-dashed border-neutral-600 flex items-center justify-center rounded-xl">
+                              HTML
+                            </div>
+                            <span>構造のみの<br>「骨組み」</span>
+                          </div>
+                          <span class="text-3xl text-neutral-600">＋</span>
+                          <div class="flex flex-col items-center gap-4">
+                            <div class="w-24 h-20 bg-neutral-800 flex items-center justify-center rounded-xl shadow-lg border border-neutral-700 text-xs gap-1 flex-wrap p-2 text-emerald-400">
+                              <span>p-4</span><span>flex</span><span>bg-dark</span><span>rounded</span>
+                            </div>
+                            <span>無数の便利な<br>「ユーティリティ」</span>
+                          </div>
+                          <span class="text-3xl text-neutral-600">＝</span>
+                          <div class="flex flex-col items-center gap-4">
+                            <div class="px-6 py-3 bg-stone-100 text-neutral-900 rounded-full font-bold shadow-xl">
+                              Nordic Button
+                            </div>
+                            <span>洗練された<br>UIコンポーネント</span>
+                          </div>
                         </div>
-                      </div>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'step2-demo'">
+                        <div class="flex flex-col items-center gap-8 w-full max-w-sm text-center">
+                          <div class="p-6 bg-black text-white w-full border border-red-500/30">
+                            <h4 class="text-xl font-bold mb-2">#000000 & #FFFFFF</h4>
+                            <p class="text-xs">コントラストが強すぎて長時間見ると目が疲れる、よくあるダークモード表現。</p>
+                          </div>
+                          <div class="p-6 bg-neutral-900 text-stone-300 w-full border border-emerald-500/30 rounded-2xl shadow-xl">
+                            <h4 class="text-xl font-bold mb-2 text-stone-100">Nordic Dark</h4>
+                            <p class="text-sm">背景は深いグレー、文字は温かみのあるストーン。上質で目に優しい美しさ。</p>
+                          </div>
+                        </div>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'step3-demo'">
+                        <div class="relative w-64 h-64 border border-blue-500/30 rounded-xl bg-blue-500/5 flex flex-col items-center justify-center">
+                          <div class="absolute -top-6 text-blue-400 font-mono text-xs font-bold">↑ Margin (m-8 : 要素間の距離)</div>
+                          <div class="w-48 h-48 border-2 border-emerald-500 rounded-2xl bg-emerald-500/20 flex flex-col items-center justify-center relative">
+                            <div class="absolute top-3 text-emerald-300 font-mono text-xs font-bold">Padding (p-6)</div>
+                            <div class="w-32 h-32 bg-stone-200 rounded-xl text-neutral-900 font-bold flex flex-col items-center justify-center text-sm px-4 text-center">
+                              ゆとりのある<br>コンテンツ領域
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'step-proximity-demo'">
+                        <div class="flex flex-col md:flex-row gap-8 w-full items-center justify-center text-left">
+                          <div class="flex-1 bg-black p-6 rounded-2xl border border-red-500/30 flex flex-col w-full max-w-sm shrink-0">
+                            <div class="text-[10px] font-bold text-red-400 mb-4 tracking-widest text-center opacity-80">BAD (均等な余白)</div>
+                            <div class="w-full flex-col flex space-y-6">
+                               <div class="w-12 h-12 bg-neutral-800 rounded-lg"></div>
+                               <div class="h-3 bg-neutral-700 rounded w-1/2"></div>
+                               <div class="h-2 bg-neutral-800 rounded w-full"></div>
+                               <div class="w-12 h-12 bg-neutral-800 rounded-lg"></div>
+                               <div class="h-3 bg-neutral-700 rounded w-1/2"></div>
+                               <div class="h-2 bg-neutral-800 rounded w-full"></div>
+                            </div>
+                          </div>
+                          <div class="flex-1 bg-neutral-900 border border-emerald-500/30 shadow-2xl rounded-[2rem] p-6 flex flex-col w-full max-w-sm relative">
+                            <div class="text-[10px] font-bold text-emerald-400 mb-4 tracking-widest text-center">GOOD (グルーピング)</div>
+                            <div class="w-full flex-col flex gap-8">
+                               <div class="flex flex-col gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                                 <div class="w-12 h-12 bg-neutral-700 rounded-lg"></div>
+                                 <div class="h-3 bg-stone-300 rounded w-1/2"></div>
+                                 <div class="h-2 bg-neutral-600 rounded w-full"></div>
+                               </div>
+                               <div class="flex flex-col gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                                 <div class="w-12 h-12 bg-neutral-700 rounded-lg"></div>
+                                 <div class="h-3 bg-stone-300 rounded w-1/2"></div>
+                                 <div class="h-2 bg-neutral-600 rounded w-full"></div>
+                               </div>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'step4-demo'">
+                        <div class="flex flex-col sm:flex-row gap-12 items-center justify-center w-full">
+                          <div class="w-40 h-40 bg-neutral-800 flex items-center justify-center text-stone-300 font-bold text-center text-sm">
+                            border無し<br>shadow無し<br>角丸無し
+                          </div>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                          <div class="w-40 h-40 bg-[#1A1A1A] rounded-[2rem] shadow-2xl flex items-center justify-center text-stone-100 font-bold text-center text-sm border border-neutral-700 relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            モダンな<br>浮遊感と輪郭
+                          </div>
+                        </div>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'step-interaction-demo'">
+                        <div class="flex gap-8 items-center">
+                          <button class="bg-neutral-800 text-stone-300 px-6 py-3 rounded-lg border border-neutral-700">
+                            フィードバックなし
+                          </button>
+                          <button class="bg-neutral-800 text-stone-300 px-6 py-3 rounded-lg border border-neutral-700 transition-all duration-300 hover:bg-neutral-700 hover:text-white hover:border-neutral-500 active:scale-95 shadow-lg hover:shadow-xl">
+                            触感のある動き
+                          </button>
+                        </div>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'practice-btn'">
+                        <button class="px-8 py-3 bg-stone-100 text-neutral-900 font-bold rounded-full transition-all hover:bg-white active:scale-95 shadow-xl shadow-white/5 text-sm">
+                          Primary Action
+                        </button>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'practice-badge'">
+                        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold tracking-wide">
+                          Success
+                        </span>
+                      </template>
+
+                      <template v-if="step.demoComponent === 'practice-card'">
+                        <div class="p-6 bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] hover:border-neutral-700 transition-colors shadow-lg max-w-sm w-full text-left cursor-default">
+                          <h3 class="text-xl font-bold text-stone-100 mb-2">Nordic Card</h3>
+                          <p class="text-neutral-400 text-sm leading-relaxed">美しい余白と細い境界線がもたらす情報整理。これがNordic DarkなUIコンポーネント開発の極意です。</p>
+                        </div>
+                      </template>
+
                     </div>
-                  </template>
-
-                  <!-- Step 4 Demo: Rounded and Shadow -->
-                  <template v-if="step.demoComponent === 'step4-demo'">
-                    <div class="flex flex-col sm:flex-row gap-12 items-center justify-center w-full">
-                      <div class="w-40 h-40 bg-neutral-800 flex items-center justify-center text-stone-300 font-bold text-center text-sm">
-                        border無し<br>shadow無し<br>角丸無し
-                      </div>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                      <div class="w-40 h-40 bg-[#1A1A1A] rounded-[2rem] shadow-2xl flex items-center justify-center text-stone-100 font-bold text-center text-sm border border-neutral-700 relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                        モダンな<br>浮遊感と輪郭
-                      </div>
-                    </div>
-                  </template>
-
-                  <!-- Step 5 Demo: Interaction -->
-                  <template v-if="step.demoComponent === 'step-interaction-demo'">
-                    <div class="flex gap-8 items-center">
-                      <button class="bg-neutral-800 text-stone-300 px-6 py-3 rounded-lg border border-neutral-700">
-                        フィードバックなし
-                      </button>
-                      <button class="bg-neutral-800 text-stone-300 px-6 py-3 rounded-lg border border-neutral-700 transition-all duration-300 hover:bg-neutral-700 hover:text-white hover:border-neutral-500 active:scale-95 shadow-lg hover:shadow-xl">
-                        触感のある動き
-                      </button>
-                    </div>
-                  </template>
-
-                  <!-- Practice 1: Button -->
-                  <template v-if="step.demoComponent === 'practice-btn'">
-                    <button class="px-8 py-3 bg-stone-100 text-neutral-900 font-bold rounded-full transition-all hover:bg-white active:scale-95 shadow-xl shadow-white/5 text-sm">
-                      Primary Action
-                    </button>
-                  </template>
-
-                  <!-- Practice 2: Badge -->
-                  <template v-if="step.demoComponent === 'practice-badge'">
-                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold tracking-wide">
-                      Success
-                    </span>
-                  </template>
-
-                  <!-- Practice 3: Card Container -->
-                  <template v-if="step.demoComponent === 'practice-card'">
-                    <div class="p-6 bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] hover:border-neutral-700 transition-colors shadow-lg max-w-sm w-full text-left cursor-default">
-                      <h3 class="text-xl font-bold text-stone-100 mb-2">Nordic Card</h3>
-                      <p class="text-neutral-400 text-sm leading-relaxed">美しい余白と細い境界線がもたらす情報整理。これがNordic DarkなUIコンポーネント開発の極意です。</p>
-                    </div>
-                  </template>
-
+                  </div>
                 </div>
               </div>
             </div>
