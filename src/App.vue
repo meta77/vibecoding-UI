@@ -117,7 +117,7 @@ const tutorialSteps = [
   {
     id: "step1",
     title: "1. ユーティリティファーストの哲学",
-    description: "Webページを作るには **HTML（骨組み）** と **CSS（デザイン）** を使います。<br>通常、CSSは別のファイルに複雑なルールを書きますが、Tailwindは「あらかじめ用意されたタグ（ユーティリティクラス）」をパズルのようにHTMLに直接くっつけてデザインを作ります。",
+    description: "Webページを作るには <b>HTML（骨組み）</b> と <b>CSS（デザイン）</b> を使います。<br>通常、CSSは別のファイルに複雑なルールを書きますが、Tailwindは「あらかじめ用意されたタグ（ユーティリティクラス）」をパズルのようにHTMLに直接くっつけてデザインを作ります。",
     insightLevel: "中級者向けの視点（設計思想）",
     insightText: "なぜTailwindを使うと洗練されるのか？それはシステムが事前に色やサイズの「美しい制限（スケール）」を持っているため、開発者が自由に設定しすぎてデザインが破綻するのを防ぐからです。",
     demoTitle: "イメージ図",
@@ -126,7 +126,7 @@ const tutorialSteps = [
   {
     id: "step2",
     title: "2. 空間の支配 (PaddingとMargin)",
-    description: "デザインを綺麗に見せるには「余白（空白）」がとても大事です。<br><br>・**Padding (`p-4` など)**: 箱の「内側」のクッション。<br>・**Margin (`m-4` など)**: 箱の「外側」のバリア（距離）。",
+    description: "デザインを綺麗に見せるには「余白（空白）」がとても大事です。<br><br>・<b>Padding (`p-4` など)</b>: 箱の「内側」のクッション。<br>・<b>Margin (`m-4` など)</b>: 箱の「外側」のバリア（距離）。",
     insightLevel: "中級者向けの視点（コツ）",
     insightText: "余白はデザインの命です。Tailwindの余白クラスは基本的に `1` = `0.25rem`（約4px）に設計されています。UIを組む時は「8px（クラスの数値2の倍数）」で間隔を統一すると、画面全体に美しいリズムが生まれます。",
     demoTitle: "箱（Box）の図解",
@@ -164,7 +164,7 @@ const tutorialSteps = [
   },
   {
     id: "step6",
-    title: "✨ 統合実践 1: Primary Button の構築",
+    title: "統合実践 1: Primary Button の構築",
     description: "学んだ知識を統合し、本サイトで使用している「一番目立たせるべきボタン」を作ります。ポイントは『真っ白ではなく石のような白（stone-100）』を使うことです。",
     code: '<button class="px-8 py-3 bg-stone-100 text-neutral-900 font-bold rounded-full transition-all hover:bg-white active:scale-95 shadow-xl shadow-white/5 text-sm">\n  Primary Action\n</button>',
     insightLevel: "設計思想",
@@ -174,7 +174,7 @@ const tutorialSteps = [
   },
   {
     id: "step7",
-    title: "✨ 統合実践 2: Status Badge (ステータスバッジ) の構築",
+    title: "統合実践 2: Status Badge (ステータスバッジ) の構築",
     description: "「完了」「処理中」などを控えめに示す小さなバッジです。背景色を透過（`/10` などの不透明度）させることがコツです。",
     code: '<span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold tracking-wide">\n  Success\n</span>',
     insightLevel: "設計思想",
@@ -184,7 +184,7 @@ const tutorialSteps = [
   },
   {
     id: "step8",
-    title: "✨ 統合実践 3: Container Card (コンテナカード) の構築",
+    title: "統合実践 3: Container Card (コンテナカード) の構築",
     description: "情報を美しく包み込む箱です。背景を他の要素よりもわずかに浮き上がらせ（明るくし）、薄いボーダーで仕切ることで情報の独立性を高めます。",
     code: '<div class="p-6 bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] hover:border-neutral-700 transition-colors shadow-lg">\n  <h3 class="text-xl font-bold text-stone-100 mb-2">Nordic Card</h3>\n  <p class="text-neutral-400 text-sm">美しい余白と細い境界線がもたらす情報整理。</p>\n</div>',
     insightLevel: "設計思想",
@@ -418,7 +418,7 @@ const tutorialSteps = [
           <!-- Tutorial Tab: Nordic Dark & Beginners -->
           <div v-else-if="activeTab === 'tutorial'" key="tutorial" class="max-w-4xl mx-auto flex flex-col gap-12 pb-20">
             <div class="text-center mb-8">
-              <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-400 mb-6 tracking-tight">UI Build Tutorial 🎨</h2>
+              <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-400 mb-6 tracking-tight">UI Build Tutorial</h2>
               <p class="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
                 「Nordic Dark（北欧ダークテーマ）」の上質なUIはどうやって作られているのか？<br>
                 Tailwindの基礎知識から、プロも使う設計思想までを体験しながら学びましょう。
@@ -472,7 +472,7 @@ const tutorialSteps = [
                     <div class="flex flex-col md:flex-row items-center gap-8 text-center text-sm font-bold text-neutral-400">
                       <div class="flex flex-col items-center gap-4">
                         <div class="w-20 h-20 border-4 border-dashed border-neutral-600 flex items-center justify-center rounded-xl">
-                          📝 HTML
+                          HTML
                         </div>
                         <span>構造のみの<br>「骨組み」</span>
                       </div>
