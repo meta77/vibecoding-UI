@@ -134,7 +134,17 @@ const tutorialSteps = [
   },
   {
     id: "step3",
-    title: "3. タイポグラフィと色彩心理",
+    title: "3. 要素のグループ化と空間 (Gapの魔法)",
+    description: "複数並べる時は <code>flex</code> と <code>gap</code> を使います。ここで重要なのが「余白の距離＝それぞれの関係性の強さ」というルールです。",
+    code: '<div class="flex flex-col gap-2">\n  <p>近い要素</p>\n  <p>（グループになる）</p>\n</div>',
+    insightLevel: "中級者向けの視点（近接の法則）",
+    insightText: "人間の脳は「近くにあるものを1つのグループ」として無意識に認識します。画像と見出しと説明文は狭く（gap-2 等）、別のカード・セクション同士は広く（gap-8 等）とることで、直感的に伝わる「情報のまとまり」を作ることができます。これをゲシュタルト要因の「近接」と呼びます。",
+    demoTitle: "均等な余白 vs グルーピングした余白",
+    demoComponent: "step-proximity-demo"
+  },
+  {
+    id: "step4",
+    title: "4. タイポグラフィと色彩心理",
     description: "色と大きさを変えてみましょう。例えば文字を白くするなら `text-white`、サイズを大きくするなら `text-2xl` と書きます。英語の意味の通りに機能します。",
     code: '<p class="text-stone-300 text-2xl font-bold">\n  Nordic Dark World\n</p>',
     insightLevel: "中級者向けの視点（美しさの本質）",
@@ -143,8 +153,8 @@ const tutorialSteps = [
     demoComponent: "step2-demo"
   },
   {
-    id: "step4",
-    title: "4. 質感の構築 (角丸・ボーダー・影)",
+    id: "step5",
+    title: "5. 質感の構築 (角丸・ボーダー・影)",
     description: "現在流行しているアプリの多くは、少し角を丸くして、浮いているような立体感を持っています。これだけで「硬い四角」が「モダンなカード」に変わります。",
     code: '<div class="rounded-2xl border border-white/10 shadow-xl">\n  カード\n</div>',
     insightLevel: "中級者向けの視点（設計思想）",
@@ -153,8 +163,8 @@ const tutorialSteps = [
     demoComponent: "step4-demo"
   },
   {
-    id: "step5",
-    title: "5. 心地よいインタラクション",
+    id: "step6",
+    title: "6. 心地よいインタラクション",
     description: "ボタンの上にマウスを乗せた時（ホバー）や、クリックした時の動きを設定します。Tailwindでは `hover:色` とするだけで、触れることができるようになります。",
     code: '<button class="transition-all hover:bg-white active:scale-95">\n  ボタン\n</button>',
     insightLevel: "中級者向けの視点（コツ）",
@@ -163,7 +173,7 @@ const tutorialSteps = [
     demoComponent: "step-interaction-demo"
   },
   {
-    id: "step6",
+    id: "step7",
     title: "統合実践 1: Primary Button の構築",
     description: "学んだ知識を統合し、本サイトで使用している「一番目立たせるべきボタン」を作ります。ポイントは『真っ白ではなく石のような白（stone-100）』を使うことです。",
     code: '<button class="px-8 py-3 bg-stone-100 text-neutral-900 font-bold rounded-full transition-all hover:bg-white active:scale-95 shadow-xl shadow-white/5 text-sm">\n  Primary Action\n</button>',
@@ -173,7 +183,7 @@ const tutorialSteps = [
     demoComponent: "practice-btn"
   },
   {
-    id: "step7",
+    id: "step8",
     title: "統合実践 2: Status Badge (ステータスバッジ) の構築",
     description: "「完了」「処理中」などを控えめに示す小さなバッジです。背景色を透過（`/10` などの不透明度）させることがコツです。",
     code: '<span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold tracking-wide">\n  Success\n</span>',
@@ -183,7 +193,7 @@ const tutorialSteps = [
     demoComponent: "practice-badge"
   },
   {
-    id: "step8",
+    id: "step9",
     title: "統合実践 3: Container Card (コンテナカード) の構築",
     description: "情報を美しく包み込む箱です。背景を他の要素よりもわずかに浮き上がらせ（明るくし）、薄いボーダーで仕切ることで情報の独立性を高めます。",
     code: '<div class="p-6 bg-[#1A1A1A] border border-neutral-800 rounded-[2rem] hover:border-neutral-700 transition-colors shadow-lg">\n  <h3 class="text-xl font-bold text-stone-100 mb-2">Nordic Card</h3>\n  <p class="text-neutral-400 text-sm">美しい余白と細い境界線がもたらす情報整理。</p>\n</div>',
@@ -517,6 +527,45 @@ const tutorialSteps = [
                         
                         <div class="w-32 h-32 bg-stone-200 rounded-xl text-neutral-900 font-bold flex flex-col items-center justify-center text-sm px-4 text-center">
                           ゆとりのある<br>コンテンツ領域
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+
+                  <!-- New Step 3 Demo: Proximity and Gap Law -->
+                  <template v-if="step.demoComponent === 'step-proximity-demo'">
+                    <div class="flex flex-col md:flex-row gap-8 w-full items-center justify-center text-left">
+                      <!-- Bad Example -->
+                      <div class="flex-1 bg-black p-6 rounded-2xl border border-red-500/30 flex flex-col w-full max-w-sm shrink-0">
+                        <div class="text-[10px] font-bold text-red-400 mb-4 tracking-widest text-center opacity-80">BAD (均等な余白)</div>
+                        <div class="w-full flex-col flex space-y-6">
+                           <!-- Gap is totally equal everywhere -->
+                           <div class="w-12 h-12 bg-neutral-800 rounded-lg"></div>
+                           <div class="h-3 bg-neutral-700 rounded w-1/2"></div>
+                           <div class="h-2 bg-neutral-800 rounded w-full"></div>
+                           <!-- second item -->
+                           <div class="w-12 h-12 bg-neutral-800 rounded-lg"></div>
+                           <div class="h-3 bg-neutral-700 rounded w-1/2"></div>
+                           <div class="h-2 bg-neutral-800 rounded w-full"></div>
+                        </div>
+                      </div>
+
+                      <!-- Good Example -->
+                      <div class="flex-1 bg-neutral-900 border border-emerald-500/30 shadow-2xl rounded-[2rem] p-6 flex flex-col w-full max-w-sm relative">
+                        <div class="text-[10px] font-bold text-emerald-400 mb-4 tracking-widest text-center">GOOD (グルーピング)</div>
+                        <div class="w-full flex-col flex gap-8">
+                           <!-- Group 1 -->
+                           <div class="flex flex-col gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                             <div class="w-12 h-12 bg-neutral-700 rounded-lg"></div>
+                             <div class="h-3 bg-stone-300 rounded w-1/2"></div>
+                             <div class="h-2 bg-neutral-600 rounded w-full"></div>
+                           </div>
+                           <!-- Group 2 -->
+                           <div class="flex flex-col gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                             <div class="w-12 h-12 bg-neutral-700 rounded-lg"></div>
+                             <div class="h-3 bg-stone-300 rounded w-1/2"></div>
+                             <div class="h-2 bg-neutral-600 rounded w-full"></div>
+                           </div>
                         </div>
                       </div>
                     </div>
